@@ -1,0 +1,67 @@
+components:
+  schemas:
+    CreateUserResponse:
+      type: object
+      properties:
+        email:
+          type: string
+        username:
+          type: string
+        _id:
+          type: string
+        createdAt:
+          type: string
+          format: date
+        updatedAt:
+          type: string
+          format: date
+    CreateSessionResponse:
+      type: object
+      properties:
+        _id:
+          type: string,
+          default: '_id12345qewrty'
+        user:
+          type: string,
+          default: '_idUserId'
+        session:
+          type: boolean,
+          default: true
+        accessToken:
+          type: string
+          default: 'yourAmazingAccessToken'
+        refreshToken:
+          type: string
+          default: 'yourAmazingRefreshToken'
+        createdAt:
+          type: string
+          format: date
+        updatedAt:
+          type: string
+          format: date
+    GetSessionsResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+          user:
+            type: string
+          is_valid:
+            type: boolean
+            default: true
+          user_agent:
+            type: string
+          createdAt:
+            type: string
+            format: date
+          updatedAt:
+            type: string
+            format: date
+    DeleteSessionResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          default: 'Your session : {session_id} has been closed'

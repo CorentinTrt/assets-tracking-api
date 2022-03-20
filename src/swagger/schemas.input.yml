@@ -1,0 +1,38 @@
+components:
+  schemas:
+    CreateUserInput:
+      type: object
+      requiered:
+        - email
+        - username
+        - password
+        - passwordConfirmation
+      properties:
+        email:
+          type: string
+          default: exemple@mail.com
+          requierments: Email's standards
+        username:
+          type: string
+          default: username
+          requierments: Should be 6 chars min
+        password:
+          type: string
+          default: 1!Qwerty
+          requierments: Should be 8 chars min and contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special chars
+        passwordConfirmation:
+          type: string
+          default: 1!Qwerty
+          requierments: Same as password
+    CreateSessionInput:
+      type: object
+      requiered:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          default: username
+        password:
+          type: string
+          default: 1!Qwerty

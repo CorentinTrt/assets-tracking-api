@@ -1,0 +1,11 @@
+# Modules
+node_modules/
+
+# Environments
+.env
+
+# Testing
+coverage/
+
+# Mac/OSX
+.DS_Store
