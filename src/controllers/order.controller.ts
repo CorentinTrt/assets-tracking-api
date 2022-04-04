@@ -3,7 +3,6 @@ import { Request, Response } from 'express';
 import { successResponse, errorResponse } from '../utils/responses';
 import { getOrderMessages } from '../utils/errors.messages';
 
-import { createOrder } from '../services/order.service';
 import { findAsset } from '../services/asset.service';
 import {
   createOwnedAsset,
@@ -11,6 +10,7 @@ import {
   updateOwnedAsset,
 } from '../services/ownedAsset.service';
 import { findExchange } from '../services/exchange.service';
+import { createOrder } from '../services/order.service';
 
 import { UserDocument } from '../models/user.model';
 
@@ -34,7 +34,7 @@ export async function createOrderHandler(req: Request, res: Response) {
     date: Date;
   } = req.body;
 
-  const _exchange = await findExchange({ name: exchange });
+  const _exchange = await findExchange({ name: exchange.toLowerCase() });
 
   if (!_exchange)
     return res
@@ -55,9 +55,17 @@ export async function createOrderHandler(req: Request, res: Response) {
       ['asset']
     ),
   ]);
+
+  if (!getOwnedAssetSold)
+    return res
+      .status(400)
+      .send(
+        errorResponse(400, [
+          { type: 'asset', message: 'Something went wrong in your request' },
+        ])
+      );
+
   const { _id: asset_sold }: { _id: string } = getOwnedAssetSold.asset;
-  // console.log('_____ASSET B', getOwnedAssetBought);
-  // console.log('_____ASSET S', getOwnedAssetSold);
 
   const isDoable = getOwnedAssetSold.amount - amount >= 0;
 
@@ -90,8 +98,10 @@ export async function createOrderHandler(req: Request, res: Response) {
         );
   };
 
+  // update or create asset bought
   const _updatedOwnedAssetBought = await getUpdatedOwnedAssetBought();
 
+  // update asset sold
   await updateOwnedAsset(
     { user, asset_symbol: assetSoldSymbol, exchange: _exchange._id },
     { $inc: { amount: -amount } }
