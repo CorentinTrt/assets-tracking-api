@@ -6,10 +6,10 @@ import { ExchangeDocument } from './exchange.model';
 
 export interface OrderDocument extends mongoose.Document {
   user: UserDocument['_id'];
-  is_draft: Boolean;
   asset_bought: AssetDocument['_id'];
   asset_sold: AssetDocument['_id'];
   exchange: ExchangeDocument['_id'];
+  is_draft: Boolean;
   amount: number;
   atm_price: number;
   date: Date;
@@ -22,7 +22,6 @@ const orderSchema = new mongoose.Schema(
       ref: 'users',
       required: true,
     },
-    is_draft: { type: Boolean, default: false },
     asset_bought: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'assets',
@@ -38,6 +37,7 @@ const orderSchema = new mongoose.Schema(
       ref: 'exchanges',
       required: true,
     },
+    is_draft: { type: Boolean, default: false },
     amount: { type: Number, required: true },
     atm_price: { type: Number, required: true },
     date: { type: Date, required: true },
