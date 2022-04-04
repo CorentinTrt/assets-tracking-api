@@ -1,14 +1,13 @@
-import { number, object, string } from 'zod';
+import { object, string } from 'zod';
 
 import isISODate from '../utils/formatValidators/isISODate';
 import isNumber from '../utils/formatValidators/isNumber';
-
 import { getOrderMessages } from '../utils/errors.messages';
 
 export const createOrderSchema = object({
   body: object({
     asset_bought: string({
-      required_error: getOrderMessages(1)?.message,
+      required_error: getOrderMessages(2)?.message,
     })
       .min(3, getOrderMessages(3)?.message)
       .max(4, getOrderMessages(4)?.message),
