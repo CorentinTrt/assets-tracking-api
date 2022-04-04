@@ -142,6 +142,13 @@ export function getAssetMessage(errorCode: number) {
         message:
           "Date is required and must match to ISO3601 date's standards (yyyy-MM-ddT00:00+00:00)",
       };
+    case 6:
+      return {
+        code: 6,
+        message: 'id_cw is requiered and must be a number',
+      };
+    default:
+      break;
   }
 }
 
@@ -201,9 +208,64 @@ export function getOrderMessages(errorCode: number) {
     case 11:
       return {
         code: 11,
-        message: 'Thwe exchange that you provide seems to not exist',
+        message:
+          'The exchange that you provide seems to not exist in our application. Please send us a message to add it.',
       };
 
+    default:
+      break;
+  }
+}
+
+export function getTransactionMessages(errorCode: number) {
+  switch (errorCode) {
+    case 1:
+      return {
+        code: 1,
+        message: 'Asset symbol is requiered',
+      };
+    case 2:
+      return {
+        code: 2,
+        message: 'Asset symbol provided is too short',
+      };
+    case 3:
+      return {
+        code: 3,
+        message: 'Asset symbol is too long',
+      };
+    case 4:
+      return {
+        code: 4,
+        message: 'Exchange name is requiered',
+      };
+    case 5:
+      return {
+        code: 5,
+        message: 'Amount is requiered and must be a number',
+      };
+    case 6:
+      return {
+        code: 6,
+        message: 'Atm price is requiered and must be a number',
+      };
+    case 7:
+      return {
+        code: 7,
+        message: 'Type is requiered and must be 0 (deposit) or 1 (withdrawal)',
+      };
+    case 8:
+      return {
+        code: 8,
+        message:
+          "Date is required and must match to ISO3601 date's standards (yyyy-MM-ddT00:00+00:00)",
+      };
+    case 9:
+      return {
+        code: 9,
+        message:
+          'The exchange that you provide seems to not exist in our application. Please send us a message to add it.',
+      };
     default:
       break;
   }
