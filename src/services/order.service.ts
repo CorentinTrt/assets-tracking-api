@@ -6,10 +6,4 @@ export async function createOrder(input: OrderDocument) {
   } catch (error: any) {
     throw new Error(error);
   }
-
-  //   try {
-  //     return await OrderModel.create();
-  //   } catch (error: any) {
-  //     throw new Error(error);
-  //   }
 }
