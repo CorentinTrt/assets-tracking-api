@@ -11,11 +11,11 @@ export async function createTransaction(input: TransactionDocument) {
   }
 }
 
-export async function findAndPopulateTransaction(
+export async function findAndPopulateTransactions(
   query: FilterQuery<TransactionDocument>,
   _collections: Array<string>
 ) {
   const collections = _collections.join(' ');
 
-  return await TransactionModel.findOne(query).populate(collections);
+  return await TransactionModel.find(query).populate(collections);
 }
