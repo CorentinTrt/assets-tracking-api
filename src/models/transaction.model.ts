@@ -23,7 +23,7 @@ const transactionSchema = new mongoose.Schema(
     },
     asset: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'assets',
+      ref: 'owned_assets',
       required: true,
     },
     exchange: {
