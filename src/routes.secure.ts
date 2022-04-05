@@ -10,7 +10,10 @@ import { createTransactionSchema } from './schemas/transaction.schema';
 import { deleteUserSessionHandler } from './controllers/session.controller';
 import { createAssetHandler } from './controllers/asset.controller';
 import { createOrderHandler } from './controllers/order.controller';
-import { createTransactionHandler } from './controllers/transaction.controller';
+import {
+  createTransactionHandler,
+  getUserTransactionsHandler,
+} from './controllers/transaction.controller';
 
 const router = express.Router();
 
@@ -41,6 +44,6 @@ router.post(
   createTransactionHandler
 );
 
-router.get('/transactions', () => {});
+router.get('/transactions', roleCheck(5), getUserTransactionsHandler);
 
 export default router;
